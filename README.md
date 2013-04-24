@@ -1,13 +1,10 @@
 # units
 
-A Clojure library designed to ... well, that part is up to you.
+Library allowing to manipulate different kinds of units.
 
-## Usage
-
-FIXME
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Jérémy Schoffen. All rights reserved.
 
 Distributed under the Eclipse Public License, the same as Clojure.
