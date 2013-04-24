@@ -2,6 +2,9 @@
 
 Library allowing to manipulate different kinds of units.
 
+## Todo
+ - implement conversions
+ - implement arithmetic with differents units when possible
 
 ## License
 
