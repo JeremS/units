@@ -1,6 +1,6 @@
 (ns units.length
   (:refer-clojure :exclude [rem])
-  (:use [units.utils :only (arithmetic-expansion)]))
+  (:use [units.utils :only (record-expansion arithmetic-expansion)]))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [mag-sym (symbol "mag")
@@ -8,9 +8,7 @@
         class-sym (symbol (str u-name "."))]
     `(do
     
-       (defrecord ~u-name [~mag-sym]
-         Object
-         (toString [_#] (str ~mag-sym ~u-str)))
+       ~(record-expansion u-name mag-sym u-str)
        
        (defn ~u-cstr [mag#]
          {:pre [(number? mag#)]}

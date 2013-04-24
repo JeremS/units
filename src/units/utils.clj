@@ -2,6 +2,11 @@
   (:refer-clojure :exclude [+ - * /])
   (:use clojure.algo.generic.arithmetic))
 
+(defn record-expansion [a-name mag-sym a-str]
+  `(defrecord ~a-name [~mag-sym]
+     Object
+     (toString [_#] (str ~mag-sym ~a-str))))
+
 (defn arithmetic-expansion [a-name a-cstr mag-key]
   `((defmethod + [~a-name ~a-name]
          [{m1# ~mag-key}{m2# ~mag-key}]

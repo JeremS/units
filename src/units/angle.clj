@@ -1,5 +1,5 @@
 (ns units.angle
-  (:use [units.utils :only (arithmetic-expansion)]))
+  (:use [units.utils :only (record-expansion arithmetic-expansion)]))
 
 (defn simplify-angle [mag neutral]
   (let [sign (if (pos? mag) + -)
@@ -17,9 +17,7 @@
         class-sym (symbol (str a-name "."))]
     `(do 
        
-       (defrecord ~a-name [~mag-sym]
-         Object
-         (toString [_#] (str ~mag-sym ~a-str)))
+       ~(record-expansion a-name mag-sym a-str)
        
        (defn ~a-cstr [mag#]
          {:pre [(number? mag#)]}
