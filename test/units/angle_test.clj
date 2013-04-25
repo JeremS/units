@@ -9,6 +9,10 @@
   (str (grad 10)) => "10grad")
 
 
+(fact "We can test angles types"
+  (rad? (rad 10)) => truthy
+  (rad? (deg 10)) => falsey)
+
 (fact "we can add two angles"
   (+ (deg 1) (deg 3)) => (deg 4)
   (+ (rad 100) (rad 10)) => (contains {:mag (roughly (:mag (rad 110)))}))

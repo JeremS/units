@@ -1,6 +1,7 @@
 (ns units.length
   (:refer-clojure :exclude [rem])
-  (:use [units.utils :only (record-expansion arithmetic-expansion)]))
+  (:use clojure.pprint
+        [units.utils :only (build-record build-type-test build-arithmetic)]))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [mag-sym (symbol "mag")
@@ -8,16 +9,17 @@
         class-sym (symbol (str u-name "."))]
     `(do
     
-       ~(record-expansion u-name mag-sym u-str)
+       ~(build-record u-name mag-sym u-str)
+       
+       ~(build-type-test u-name u-cstr)
        
        (defn ~u-cstr [mag#]
          {:pre [(number? mag#)]}
          (~class-sym mag#))
        
-       ~@(arithmetic-expansion u-name u-cstr mag-key)
+       ~@(build-arithmetic u-name u-cstr mag-key)
        
        )))
-
 
 (deflength Em  em  "em")
 (deflength Rem rem "rem")

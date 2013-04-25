@@ -1,5 +1,5 @@
 (ns units.angle
-  (:use [units.utils :only (record-expansion arithmetic-expansion)]))
+  (:use [units.utils :only (build-record build-type-test build-arithmetic)]))
 
 
 (defn simplify-angle [mag neutral]
@@ -14,13 +14,15 @@
         class-sym (symbol (str a-name "."))]
     `(do 
        
-       ~(record-expansion a-name mag-sym a-str)
+       ~(build-record a-name mag-sym a-str)
+       
+       ~(build-type-test a-name a-cstr)
        
        (defn ~a-cstr [mag#]
          {:pre [(number? mag#)]}
          (~class-sym (simplify-angle mag# ~a-neutral)))
        
-       ~@(arithmetic-expansion a-name a-cstr mag-key)
+       ~@(build-arithmetic a-name a-cstr mag-key)
        
        )))
 

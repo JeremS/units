@@ -11,6 +11,10 @@
   (str (rem 10)) => "10rem"
   (str (% 10))   => "10%")
 
+(fact "We can test lenghts types"
+  (em? (em 10)) => truthy
+  (px? (em 10)) => falsey)
+
 
 (fact "we can add two lengths"
   (+ (px 1) (px 3)) => (px 4)
