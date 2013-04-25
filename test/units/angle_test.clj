@@ -6,9 +6,7 @@
 
 (fact "units have a string representation"
   (str (deg  10)) => "10deg"
-  (str (grad 10)) => "10grad"
-  (str (rad  1)) => "1rad"
-  (str (turn 0.1))  => "0.1turn")
+  (str (grad 10)) => "10grad")
 
 
 (fact "we can add two angles"

@@ -1,15 +1,12 @@
 (ns units.angle
   (:use [units.utils :only (record-expansion arithmetic-expansion)]))
 
+
 (defn simplify-angle [mag neutral]
-  (let [sign (if (pos? mag) + -)
-        abs-mag (Math/abs mag)]
-    (loop [current abs-mag]
-      (let [new (- current neutral)]
-        (cond 
-         (neg? new) (sign current)
-         (zero? new) 0
-          :else      (recur new))))))
+  (-> mag 
+      (mod neutral) 
+      (+ neutral)
+      (mod neutral)))
 
 (defmacro defangle [a-name a-cstr a-str a-neutral]
   (let [mag-sym (symbol "mag")
