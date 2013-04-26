@@ -9,12 +9,10 @@
       (mod neutral)))
 
 (defmacro defangle [a-name a-cstr a-str a-neutral]
-  (let [mag-sym (symbol "mag")
-        mag-key (keyword "mag")
-        class-sym (symbol (str a-name "."))]
+  (let [class-sym (symbol (str a-name "."))]
     `(do 
        
-       ~(build-record a-name mag-sym a-str)
+       ~(build-record a-name 'mag a-str)
        
        ~(build-type-test a-name a-cstr)
        
@@ -22,7 +20,7 @@
          {:pre [(number? mag#)]}
          (~class-sym (simplify-angle mag# ~a-neutral)))
        
-       ~@(build-arithmetic a-name a-cstr mag-key)
+       ~@(build-arithmetic a-name a-cstr :mag)
        
        )))
 

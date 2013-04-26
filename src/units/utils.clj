@@ -3,9 +3,16 @@
   (:use clojure.algo.generic.arithmetic
         [clojure.string :only (lower-case)]))
 
-(defn between [value lower upper]
+(defn between? [value lower upper]
   (and (<= lower value)
        (<= value upper)))
+
+(defn keep-inside [value lower upper]
+  (cond 
+   (< value lower) lower
+   (> value upper) upper
+   :else           value))
+
 
 (defn build-record [a-name mag-sym a-str]
   `(defrecord ~a-name [~mag-sym]

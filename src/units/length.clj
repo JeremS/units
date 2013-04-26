@@ -4,12 +4,10 @@
         [units.utils :only (build-record build-type-test build-arithmetic)]))
 
 (defmacro deflength [u-name u-cstr u-str]
-  (let [mag-sym (symbol "mag")
-        mag-key (keyword "mag")
-        class-sym (symbol (str u-name "."))]
+  (let [class-sym (symbol (str u-name "."))]
     `(do
     
-       ~(build-record u-name mag-sym u-str)
+       ~(build-record u-name 'mag u-str)
        
        ~(build-type-test u-name u-cstr)
        
@@ -17,7 +15,7 @@
          {:pre [(number? mag#)]}
          (~class-sym mag#))
        
-       ~@(build-arithmetic u-name u-cstr mag-key)
+       ~@(build-arithmetic u-name u-cstr :mag)
        
        )))
 

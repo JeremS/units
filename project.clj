@@ -1,4 +1,4 @@
-(defproject units "0.1.1"
+(defproject units "0.1.1-SNAPSHOT"
   :description "Library allowing to manipulate different kinds of units."
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"

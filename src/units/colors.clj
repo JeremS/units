@@ -1,45 +1,47 @@
 (ns units.colors
   (:use [units.length :only (%)]
         [units.angle  :only (deg)]
-        [units.utils  :only (between)]))
+        [units.utils  :only (keep-inside)]))
+(comment
+(defprotocol Lighten
+  (lighten [this mag]
+    "Add light to a color"))
 
-(defn- rgb-valid? [n]
-  (between n 0 255))
+(defn darken [c mag]
+  (lighten c (- mag)))
+)
 
-(defn- alpha-valid? [a]
-  (between a 0 1))
-
-(defn- sl-valid? [v]
-  (between v 0 100))
-
-
-(defrecord RGBa [r g b a]
-  Object
-  (toString [_] (str "rgba(" r "," g"," b "," a")")))
+(defrecord RGBa [r g b a])
 
 (defn rgba
   ([r g b]
    (rgba r g b 1.0))
   ([r g b a]
-   {:pre [(every? number? (list r g b a))
-          (every? rgb-valid? (list r g b))
-          (alpha-valid? a)]}
-   (RGBa. r g b a)))
+   {:pre [(every? number? (list r g b a))]}
+   
+   (RGBa. (keep-inside r 0 255)
+          (keep-inside g 0 255)
+          (keep-inside b 0 255)
+          (keep-inside a 0 1))))
 
+
+(declare hsla)
 
 (defrecord HSLa [h s l a]
-  Object
-  (toString [_] (str "hsla(" h "," s"," l "," a")")))
+  ;Lighten
+  ;(lighten [_ mag]
+  ;  (hsla h s (+ l mag) a))
+  )
 
 (defn hsla 
   ([h s l]
    (hsla h s l 1.0))
   ([h s l a]
-   {:pre [(every? number? (list h s l a))
-          (every? sl-valid? (list s l))
-          (alpha-valid? a)]}
-   (HSLa. (deg h) (% s) (% l) a)))
-
+   {:pre [(every? number? (list h s l a))]}
+   (HSLa. (deg h) 
+          (-> s (keep-inside 0.0 100.0) %) 
+          (-> l (keep-inside 0.0 100.0) %) 
+          (-> a (keep-inside 0.0   1.0)  ))))
 
 
 ;; conversions from https://github.com/jolby/colors/blob/master/src/com/evocomputing/colors.clj
