@@ -18,7 +18,7 @@
            (~class-sym (circular-val mag# ~a-neutral))
            (convert mag# ~a-name)))
 
-       ~@(build-arithmetic a-name a-cstr :mag)
+       ~(build-arithmetic a-name a-cstr :mag)
 
        )))
 

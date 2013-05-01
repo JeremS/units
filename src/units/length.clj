@@ -17,7 +17,7 @@
            (~class-sym mag#)
            (convert mag# ~u-name)))
 
-       ~@(build-arithmetic u-name u-cstr :mag)
+       ~(build-arithmetic u-name u-cstr :mag)
 
        )))
 
