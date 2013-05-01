@@ -2,7 +2,6 @@
   (:use [units.utils  :only (circular-val keep-inside)]
         [converso.core]))
 
-
 (defn- color [mag]
   (keep-inside mag 0 255))
 
