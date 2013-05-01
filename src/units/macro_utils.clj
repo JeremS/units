@@ -36,5 +36,4 @@
 
        (defmethod / [~a-name Number]
          [{m# ~mag-key} n#]
-         (~a-cstr (clojure.core// m# n#)))
-    ))
+         (~a-cstr (clojure.core// m# n#)))))

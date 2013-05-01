@@ -1,6 +1,6 @@
 (ns units.colors
   (:use [units.utils  :only (circular-val keep-inside)]
-        [converso.core]))
+        [converso.core :only (add-conversion convert)]))
 
 (defn- color [mag]
   (keep-inside mag 0 255))
