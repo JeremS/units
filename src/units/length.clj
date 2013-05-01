@@ -1,11 +1,8 @@
 (ns units.length
+  (:refer-clojure :exclude (rem))
   (:use [converso.core :only (add-conversion remove-all-conversions convert)]
         [units.macro-utils :only (build-record build-type-test)]
-        [units.arithmetic :only (build-arithmetic)]
-
-
-        clojure.pprint
-        ))
+        [units.generic :only (build-arithmetic)]))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]

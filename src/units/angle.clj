@@ -2,7 +2,7 @@
   (:use [units.utils :only (circular-val)]
         [converso.core :only (add-conversion remove-all-conversions convert)]
         [units.macro-utils :only (build-record build-type-test)]
-        [units.arithmetic :only (build-arithmetic)]))
+        [units.generic :only (build-arithmetic)]))
 
 
 (defmacro defangle [a-name a-cstr a-str a-neutral]

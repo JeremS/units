@@ -1,6 +1,4 @@
 (ns units.colors
-  (:require units.arithmetic
-            [clojure.algo.generic.arithmetic :as gen])
   (:use [units.utils  :only (circular-val keep-inside)]
         [converso.core :only (add-conversion convert)]))
 

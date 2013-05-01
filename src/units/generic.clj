@@ -1,26 +1,26 @@
-(ns units.arithmetic
-  (:refer-clojure :exclude [+ * - /])
+(ns units.generic
+  (:refer-clojure :exclude [+ - * / = >])
   (:use clojure.algo.generic.arithmetic
+        [clojure.algo.generic.comparison
+         :only (= >)]
         [clojure.algo.generic :only (root-type)]
-        [converso.core :only (convert)]
+        [converso.core :only (convert)]))
 
-        clojure.tools.trace))
 
-(defmethod + [root-type root-type]
-  [u1 u2]
-  (try
-    (let [u1 (convert u1 (type u2))]
-      (+ u1 u2))
-    (catch Exception e
-      (throw (ex-info "Addition non implemented for these types" {:param1 u1 :param2 u2})))))
+(defmacro defgeneric [g-fn]
+  `(defmethod ~g-fn [root-type root-type]
+     [~'v1 ~'v2]
+     (try
+       (let [~'v1 (convert ~'v1 (type ~'v2))]
+      (~g-fn ~'v1 ~'v2))
+    (catch Exception ~'e
+      (throw (ex-info "Incompatible types" {:param1 ~'v1 :param2 ~'v2}))))))
 
-(defmethod - [root-type root-type]
-  [u1 u2]
-  (try
-    (let [u1 (convert u1 (type u2))]
-      (- u1 u2))
-    (catch Exception e
-      (throw (ex-info "Addition non implemented for these types" {:param1 u1 :param2 u2})))))
+(defmacro defgenerics [& gs]
+  `(do ~@(for [g gs]
+           (list 'defgeneric g))))
+
+(defgenerics + -)
 
 (defn build-arithmetic [a-name a-cstr mag-key]
   `((defmethod + [~a-name ~a-name]
