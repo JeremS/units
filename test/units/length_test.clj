@@ -35,3 +35,12 @@
 
 (fact "we can divide a length"
   (/ (em 100) 10) => (em 10))
+
+(fact "We can convert absolute lengths inot one another"
+  (-> 100 mm cm) => (cm 10)
+  (-> 100 mm in :mag) => (roughly (/ 100 10 2.54)))
+
+(fact "We can add or substract absolute lengths"
+  (+ (cm 2.54) (in 1)) => (in 2.0)
+  (- (cm 2.54) (in 1)) => (in 0.0))
+

@@ -1,9 +1,11 @@
 (ns units.length
-  (:refer-clojure :exclude [rem + - * /])
-  (:use clojure.pprint
-        clojure.algo.generic.arithmetic
-        [converso.core :only (add-conversion remove-all-conversions convert)]
-        [units.macro-utils :only (build-record build-type-test build-arithmetic)]))
+  (:use [converso.core :only (add-conversion remove-all-conversions convert)]
+        [units.macro-utils :only (build-record build-type-test)]
+        [units.arithmetic :only (build-arithmetic)]
+
+
+        clojure.pprint
+        ))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]
@@ -21,6 +23,7 @@
        ~@(build-arithmetic u-name u-cstr :mag)
 
        )))
+
 
 (deflength Em  em  "em")
 (deflength Rem rem "rem")
@@ -70,5 +73,3 @@
 (add-conversion Inch       Pixel      in->px px->in)
 (add-conversion Inch       Point      in->pt pt->in)
 (add-conversion Pica       Point      pc->pt pt->pc)
-
-

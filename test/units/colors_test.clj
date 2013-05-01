@@ -1,8 +1,6 @@
 (ns units.colors_test
   (:use units.colors
-        midje.sweet
-
-        clojure.repl))
+        midje.sweet))
 
 (facts "We can convert colors"
   ; >> tests from https://github.com/jolby/colors/blob/master/test/com/evocomputing/test/colors.clj
@@ -81,6 +79,7 @@
     (alpha (rgba 1 1 1 0.2)) => 0.2
     (alpha (hsla 1 1 1 0.2)) => 0.2)
 
+
   (fact "We can play with color components"
 
     (-> (hsla 180 50 50) (adjust-hue  60) hue)
@@ -146,8 +145,6 @@
     => (+ 180 10)
 
     (-> (rgba 30 30 30) inverse)
-    => (rgba 225 225 225)
-    ))
-
+    => (rgba 225 225 225)))
 
 

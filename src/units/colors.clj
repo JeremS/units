@@ -1,4 +1,6 @@
 (ns units.colors
+  (:require units.arithmetic
+            [clojure.algo.generic.arithmetic :as gen])
   (:use [units.utils  :only (circular-val keep-inside)]
         [converso.core :only (add-conversion convert)]))
 
@@ -30,8 +32,6 @@
           (opacity a))))
 
 
-(declare hsla)
-
 (defrecord HSLa [h s l a])
 
 (defn hsla
@@ -45,9 +45,6 @@
           (% s)
           (% l)
           (opacity a))))
-
-
-
 
 ;; conversions from https://github.com/jolby/colors/blob/master/src/com/evocomputing/colors.clj
 
@@ -247,3 +244,4 @@
           (res g1 g2)
           (res b1 b2)
           alpha)))
+

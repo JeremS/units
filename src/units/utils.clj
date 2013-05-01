@@ -10,7 +10,6 @@
    (> value upper) upper
    :else           value))
 
-
 (defn circular-val [mag neutral]
   (-> mag
       (mod neutral)

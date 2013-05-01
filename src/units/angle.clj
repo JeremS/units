@@ -1,7 +1,8 @@
 (ns units.angle
   (:use [units.utils :only (circular-val)]
         [converso.core :only (add-conversion remove-all-conversions convert)]
-        [units.macro-utils :only (build-record build-type-test build-arithmetic)]))
+        [units.macro-utils :only (build-record build-type-test)]
+        [units.arithmetic :only (build-arithmetic)]))
 
 
 (defmacro defangle [a-name a-cstr a-str a-neutral]
@@ -28,7 +29,7 @@
 (defangle Turn     turn "turn" 1)
 
 (defn deg->turn [x] (-> x :mag (/ 360.0) turn))
-(defn turn->deg [x] (-> x :mag (* 360.0) turn))
+(defn turn->deg [x] (-> x :mag (* 360.0) deg))
 
 (defn grad->turn [x] (-> x :mag (/ 400.0) turn))
 (defn turn->grad [x] (-> x :mag (* 400.0) grad))
@@ -46,3 +47,5 @@
 (add-conversion Degree   Turn deg->turn  turn->deg)
 (add-conversion Gradiant Turn grad->turn turn->grad)
 (add-conversion Radiant  Turn rad->turn  turn->rad)
+
+

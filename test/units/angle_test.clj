@@ -39,12 +39,12 @@
   (grad 400)             => (grad 0)
   (rad (* 2 (Math/PI)))  => (rad 0)
   (turn 1)               => (turn 0)
-  
+
   (deg (+ 360 20))              => (deg 20)
   (grad (+ 400 20))             => (grad 20)
   (rad (+ (* 2 (Math/PI)) 20))  => (contains {:mag (roughly (:mag (rad 20)))})
   (turn (+ 1 20))               => (turn 20)
-  
+
   (deg (* 360 20))              => (deg 0)
   (grad (* 400 20))             => (grad 0)
   (rad (* (* 2 (Math/PI)) 20))  => (some-checker (contains {:mag (roughly (:mag (rad 0)))})
@@ -52,4 +52,15 @@
   (turn (* 1 20))               => (turn 0))
 
 
-  
+(fact "We can convert angles from one unit to another"
+  (-> 180 deg turn rad turn grad deg :mag)
+  => (roughly 180.0))
+
+(fact "We can add and substract angle of different units"
+  (:mag (+ (deg 180) (turn 0.25))) => (roughly 0.75)
+  (:mag (- (deg 180) (turn 0.25))) => (roughly 0.25))
+
+
+
+
+
