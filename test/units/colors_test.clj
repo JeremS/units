@@ -1,4 +1,5 @@
-(ns units.colors_test
+(ns  ^{:author "Jeremy Schoffen."}
+  units.colors_test
   (:use units.colors
         midje.sweet))
 

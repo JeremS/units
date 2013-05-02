@@ -1,4 +1,5 @@
-(ns units.length-test
+(ns  ^{:author "Jeremy Schoffen."}
+  units.length-test
   (:refer-clojure :exclude [rem + - * / = not= < > <= >= zero? pos? neg? min max])
   (:use units.length
         midje.sweet

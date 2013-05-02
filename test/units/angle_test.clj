@@ -1,4 +1,5 @@
-(ns units.angle-test
+(ns  ^{:author "Jeremy Schoffen."}
+  units.angle-test
   (:refer-clojure :exclude [+ - * / = not= < > <= >= zero? pos? neg? min max])
   (:require [units.angle :refer :all])
   (:use midje.sweet

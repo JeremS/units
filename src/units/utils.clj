@@ -1,6 +1,7 @@
 ;; ## Utilities
 
-(ns units.utils)
+(ns  ^{:author "Jeremy Schoffen."}
+  units.utils)
 
 (defn between? [value lower upper]
   (and (<= lower value)
