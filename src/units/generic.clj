@@ -1,4 +1,9 @@
-(ns units.generic
+;; ## Generic
+;; Here we defined generic implementations
+;; for arithmetic and comparison.
+
+(ns ^{:author "Jeremy Schoffen."}
+  units.generic
   (:refer-clojure :exclude [+ - * / = not= < > <= >= zero? pos? neg? min max])
   (:use clojure.algo.generic.arithmetic
         clojure.algo.generic.comparison
@@ -6,6 +11,9 @@
         [converso.core :only (convert)]
 
         clojure.repl))
+
+
+;; ### symbols of the generic functions.
 
 (def ^:private unary-comparison-fns
   '(zero? pos? neg?))
@@ -21,10 +29,14 @@
   '(+ -))
 
 
+;; ### Template of code for generic implementations.
 
 (defn- defgeneric-binary
   "Construct the defmethod for binary comparisons between
-  2 different types."
+  2 different types.
+
+  To do so, the contructed method tries to convert the
+  first arg into the type of the other."
   [g-fn]
   `(defmethod ~g-fn [root-type root-type]
      [~'v1 ~'v2]
@@ -42,7 +54,7 @@
      ~@(for [g (concat binary-arithmetic-fns binary-comparison-fns)]
            (defgeneric-binary g))))
 
-; We generates the generic comparisons here
+;; We generates the generic comparisons here
 (defgenerics-binary)
 
 

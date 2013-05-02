@@ -1,11 +1,31 @@
-(ns units.colors
+;; ## Colors
+;; Here are defined type for color, conversions
+;; and some helpers to work the colors !
+
+
+(ns ^{:author "Jeremy Schoffen."}
+  units.colors
   (:use [units.utils  :only (circular-val keep-inside)]
         [converso.core :only (add-conversion convert)]))
 
-(defn- color [mag]
+;; ### Private utilities
+
+(defn- color
+  "Used to keep rgb components in the 0 255 range."
+  [mag]
   (keep-inside mag 0 255))
 
-(defn- deg [mag]
+(defn- deg
+  "Used to keep hue compenent in the 0 360 range
+  with:
+
+
+      (=  (deg 380)
+          (deg -20)
+          (deg 20))
+
+  "
+  [mag]
   (circular-val mag 360))
 
 (defn- % [mag]
@@ -14,9 +34,17 @@
 (defn- opacity [mag]
   (keep-inside mag 0 1))
 
+
+;; ### Types definition
+
+
 (defrecord RGBa [r g b a])
 
 (defn rgba
+  "Contruct an rgba color.
+
+   - used with 1 arg -> tries to convert the arg into an rgba color.
+   - used with 3 args forces the alpha to 1.0"
   ([value]
    (convert value RGBa))
   ([r g b]
@@ -33,6 +61,10 @@
 (defrecord HSLa [h s l a])
 
 (defn hsla
+  "Contruct an hsla color.
+
+   - used with 1 arg -> tries to convert the arg into an hsla color.
+   - used with 3 args forces the alpha to 1.0"
   ([value]
    (convert value HSLa))
   ([h s l]
@@ -44,7 +76,9 @@
           (% l)
           (opacity a))))
 
-;; conversions from https://github.com/jolby/colors/blob/master/src/com/evocomputing/colors.clj
+;; ### Conversions
+;; The conversions are copied from
+;; [colors](https://github.com/jolby/colors/blob/master/src/com/evocomputing/colors.clj).
 
 (defn- hue->rgb [m1 m2 h]
   (let [h (cond (< h 0) (inc h)
@@ -99,63 +133,76 @@
     (hsla h (* s 100.0) (* l 100.0) a)))
 
 
-;; Conversions
+;; ### Conversions
+
 (add-conversion RGBa HSLa rgba->hsla hsla->rgba)
 
 
-;; Utilities
 
-; algorithms from http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#mix-instance_method
-(defn red [color]
+
+;; ### Utilities
+;; Algorithms from [sass](http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#mix-instance_method).
+
+
+(defn red
   "Red component of a color."
+  [color]
   (-> color rgba :r))
 
-(defn green [color]
+(defn green
   "Green component of a color."
+  [color]
   (-> color rgba :g))
 
-(defn blue [color]
+(defn blue
   "Blue component of a color."
+  [color]
   (-> color rgba :b))
 
 
-(defn hue [color]
+(defn hue
   "Hue of a color."
+  [color]
   (-> color hsla :h))
 
-(defn saturation [color]
+(defn saturation
   "Saturation of a color."
+  [color]
   (-> color hsla :s))
 
-(defn lightness [color]
+(defn lightness
   "Lightness of a color."
+  [color]
   (-> color hsla :l))
 
-(defn alpha [color]
+(defn alpha
   "Get the alpha/opacity of a color."
+  [color]
   (:a color))
 
 
 
-(defn adjust-hue [c mag]
+(defn adjust-hue
   "Adds to the hue of a color."
+  [c mag]
   (let [{h :h :as c} (hsla c)]
     (assoc c :h (deg (+ h mag)))))
 
 
 (defn lighten
-  "Add light to a color"
+  "Add light to a color."
   [c mag]
   (let [{l :l :as c} (hsla c)]
     (assoc c :l (% (+ l mag)))))
 
 (defn darken
-  "Remove light from a color"
+  "Remove light from a color."
   [c mag]
   (lighten c (- mag)))
 
-(defn saturate [c mag]
-  "Add saturation to a color"
+(defn saturate
+  "Add saturation to a color."
+  [c mag]
   (let [{s :s :as c} (hsla c)]
     (assoc c :s (% (+ s mag)))))
 
@@ -164,18 +211,20 @@
   [c mag]
   (saturate c (- mag)))
 
-(defn redify [c mag]
-  "Makes a color redder"
+(defn redify
+  "Makes a color redder."
+  [c mag]
   (let [{r :r :as c} (rgba c)]
     (assoc c :r (color (+ r mag)))))
 
 (defn deredify
-  "Make a color redder"
+  "Make a color less red."
   [c mag]
   (redify c (- mag)))
 
-(defn greenify [c mag]
-  "Makes a color greener"
+(defn greenify
+  "Makes a color greener."
+  [c mag]
   (let [{g :g :as c} (rgba c)]
     (assoc c :g (color (+ g mag)))))
 
@@ -185,8 +234,9 @@
   (greenify c (- mag)))
 
 
-(defn blueify [color mag]
+(defn blueify
   "Makes a color bluer."
+  [color mag]
   (let [{:keys [r g b a]} (rgba color)]
     (rgba r g (+ b mag) a)))
 
@@ -195,31 +245,39 @@
   [color mag]
   (blueify color (- mag)))
 
-(defn opacify [{a :a :as color} mag]
+(defn opacify
   "Makes a color more opaque"
+  [{a :a :as color} mag]
   (assoc color :a (keep-inside (+ a mag) 0 1)))
 
-(defn transparentize [color mag]
-  "Make a more transparent color"
+(defn transparentize
+  "Make a more transparent color."
+  [color mag]
   (opacify color (- mag)))
 
 (defn grayscale [c]
   "Desaturate a color complitely."
   (desaturate c 100))
 
-(defn c-complement [c]
+(defn c-complement
   "Returns the complement of a color."
+  [c]
   (adjust-hue c 180))
 
-(defn inverse [c]
+(defn inverse
   "Returns the inverse of a color."
+  [c]
   (let [{:keys [r g b a]} (rgba c)]
     (rgba (- 255 r)
           (- 255 g)
           (- 255 b)
           a)))
 
-(defn mix [c1 c2 w]
+(defn mix
+  "Mixing to color doing a weighted average,
+  I trusted [sass](http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#mix-instance_method)
+  since a already have so much good stuff."
+  [c1 c2 w]
   (let [{r1 :r g1 :g b1 :b a1 :a} (rgba c1)
         {r2 :r g2 :g b2 :b a2 :a} (rgba c2)
 

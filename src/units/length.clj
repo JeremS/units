@@ -1,4 +1,8 @@
-(ns units.length
+;; ## Length
+;; Definition of the length unit types.
+
+(ns ^{:author "Jeremy Schoffen."}
+  units.length
   (:refer-clojure :exclude (rem))
   (:require [clojure.algo.generic.arithmetic :as agen]
             [clojure.algo.generic.comparison :as cgen])
@@ -6,7 +10,11 @@
         [units.macro-utils :only (build-record build-type-test)]
         [units.generic :only (build-arithmetic build-comparisons)]))
 
-(defmacro deflength [u-name u-cstr u-str]
+;; ### Definition template
+;; Template used to define each length types.
+
+(defmacro ^:private deflength
+  [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]
     `(do
 
@@ -25,6 +33,7 @@
 
        )))
 
+;; ### Types definitions
 
 (deflength Em  em  "em")
 (deflength Rem rem "rem")
@@ -46,7 +55,9 @@
 (deflength Pica       pc "pc")
 
 
-; conversions
+;; ### Conversions
+;; No need to define each and every conversion,
+;; converso take care of us.
 
 (defn- cm->mm [x] (-> x :mag (* 10) mm))
 (defn- mm->cm [x] (-> x :mag (/ 10) cm))
@@ -63,13 +74,14 @@
 (defn- pc->pt [x] (-> x :mag (* 12.0) pt))
 (defn- pt->pc [x] (-> x :mag (/ 12.0) pc))
 
-
+;; Cleanning converso (usefful when developping at the repl.)
 (remove-all-conversions Centimeter Millimeter)
 (remove-all-conversions Inch       Centimeter)
 (remove-all-conversions Inch       Pixel)
 (remove-all-conversions Inch       Point)
 (remove-all-conversions Pica       Point)
 
+;; Set up of converso.
 (add-conversion Centimeter Millimeter cm->mm mm->cm)
 (add-conversion Inch       Centimeter in->cm cm->in)
 (add-conversion Inch       Pixel      in->px px->in)

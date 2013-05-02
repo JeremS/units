@@ -1,3 +1,5 @@
+;; ## Utilities
+
 (ns units.utils)
 
 (defn between? [value lower upper]
@@ -10,7 +12,9 @@
    (> value upper) upper
    :else           value))
 
-(defn circular-val [mag neutral]
+(defn circular-val
+  "Keeps a value between `0` and `neutral`."
+  [mag neutral]
   (-> mag
       (mod neutral)
       (+ neutral)
