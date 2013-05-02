@@ -38,7 +38,10 @@
 ;; ### Types definition
 
 
-(defrecord RGBa [r g b a])
+(defrecord RGBa [r g b a]
+  Object
+  (toString [_] (str "rgba(" r \, g \, b \, a ")")))
+
 
 (defn rgba
   "Contruct an rgba color.
@@ -58,7 +61,11 @@
           (opacity a))))
 
 
-(defrecord HSLa [h s l a])
+(defrecord HSLa [h s l a]
+  Object
+  (toString [_] (str "hsla(" h \, s "%," l "%," a ")")))
+
+
 
 (defn hsla
   "Contruct an hsla color.
