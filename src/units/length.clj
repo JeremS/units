@@ -1,10 +1,10 @@
 (ns units.length
   (:refer-clojure :exclude (rem))
+  (:require [clojure.algo.generic.arithmetic :as agen]
+            [clojure.algo.generic.comparison :as cgen])
   (:use [converso.core :only (add-conversion remove-all-conversions convert)]
         [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic build-comparisons)]
-
-        clojure.pprint))
+        [units.generic :only (build-arithmetic build-comparisons)]))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]
