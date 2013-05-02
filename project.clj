@@ -1,6 +1,6 @@
 (defproject units "0.2.0"
-  :description "Library allowing to manipulate different kinds of units."
-  :url "http://example.com/FIXME"
+  :description "Library allowing to manipulate different kinds of web units."
+  :url "https://github.com/JeremS/units"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
