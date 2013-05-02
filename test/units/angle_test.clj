@@ -1,8 +1,9 @@
 (ns units.angle-test
-  (:refer-clojure :exclude [+ - * /])
+  (:refer-clojure :exclude [+ - * / = not= < > <= >= zero? pos? neg? min max])
   (:require [units.angle :refer :all])
   (:use midje.sweet
-        clojure.algo.generic.arithmetic))
+        clojure.algo.generic.arithmetic
+        clojure.algo.generic.comparison))
 
 (fact "units have a string representation"
   (str (deg  10)) => "10deg"
@@ -60,6 +61,37 @@
   (:mag (+ (deg 180) (turn 0.25))) => (roughly 0.75)
   (:mag (- (deg 180) (turn 0.25))) => (roughly 0.25))
 
+
+(fact "We can compare angles"
+  (pos?  (deg 10)) => truthy
+  (zero? (deg 10)) => falsey
+
+  (zero? (deg 0)) => truthy
+
+
+  (= (deg 90) (deg 90)) => truthy
+  (= (deg 90.0) (grad 100.0)) => truthy
+
+  (not= (deg 10.0) (grad 10.0)) => truthy
+  (not= (deg 90.0) (grad 100.0)) => falsey
+
+  (< (deg 10.0) (deg 10.0)) => falsey
+  (< (deg 90.0) (grad 100.0)) => falsey
+
+  (> (deg 10.0) (deg 10.0)) => falsey
+  (> (deg 10.0) (grad 100.0)) => falsey
+
+  (<= (deg 10.0) (deg 100.0)) => truthy
+  (<= (deg 10.0) (grad 100.0)) => truthy
+
+  (<= (deg 100.0) (grad 100.0)) => falsey
+  (<= (deg 100) (grad 100.0)) => falsey
+
+  (>= (deg 10.0) (deg 100.0)) => falsey
+  (>= (deg 100.0) (grad 100.0)) => truthy
+
+  (min (deg 90.0) (grad 101.0)) => (deg 90.0)
+  (max (deg 90.0) (grad 101.0)) => (grad 101.0))
 
 
 

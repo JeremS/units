@@ -2,23 +2,25 @@
   (:use [units.utils :only (circular-val)]
         [converso.core :only (add-conversion remove-all-conversions convert)]
         [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic)]))
+        [units.generic :only (build-arithmetic build-comparisons)]))
 
 
 (defmacro defangle [a-name a-cstr a-str a-neutral]
   (let [class-sym (symbol (str a-name "."))]
     `(do
 
-       ~(build-record a-name 'mag a-str)
-
-       ~(build-type-test a-name a-cstr)
+       ~(build-record a-name a-str)
 
        (defn ~a-cstr [mag#]
          (if (isa? (type mag#) Number)
            (~class-sym (circular-val mag# ~a-neutral))
            (convert mag# ~a-name)))
 
-       ~(build-arithmetic a-name a-cstr :mag)
+       ~(build-type-test a-name a-cstr)
+
+       ~(build-arithmetic a-name a-cstr)
+
+       ~(build-comparisons a-name)
 
        )))
 

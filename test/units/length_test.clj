@@ -1,8 +1,9 @@
 (ns units.length-test
-  (:refer-clojure :exclude [rem + - * /])
-  (:require [units.length :refer :all])
-  (:use midje.sweet
-        clojure.algo.generic.arithmetic))
+  (:refer-clojure :exclude [rem + - * / = not= < > <= >= zero? pos? neg? min max])
+  (:use units.length
+        midje.sweet
+        clojure.algo.generic.arithmetic
+        clojure.algo.generic.comparison))
 
 
 (fact "units have a string representation"
@@ -43,4 +44,44 @@
 (fact "We can add or substract absolute lengths"
   (+ (cm 2.54) (in 1)) => (in 2.0)
   (- (cm 2.54) (in 1)) => (in 0.0))
+
+(fact "We can compare length types"
+  (neg?  (cm 10)) => falsey
+  (pos?  (cm 10)) => truthy
+  (zero? (cm 10)) => falsey
+
+  (neg?  (cm -10)) => truthy
+  (pos?  (cm -10)) => falsey
+  (zero? (cm -10)) => falsey
+
+  (zero? (cm 0)) => truthy
+
+
+  (= (cm 10) (cm 10)) => truthy
+  (= (cm 10) (mm 100)) => truthy
+
+  (not= (cm 10) (mm 10)) => truthy
+  (not= (cm 10) (mm 100)) => falsey
+
+  (< (cm 10) (cm 10)) => falsey
+  (< (cm 10) (mm 100)) => falsey
+
+  (> (cm 10) (cm 10)) => falsey
+  (> (cm 10) (mm 100)) => falsey
+
+  (<= (cm 10) (mm 100)) => truthy
+  (<= (cm 10) (mm 100)) => truthy
+
+  (<= (cm 100) (mm 100)) => falsey
+  (<= (cm 100) (mm 100)) => falsey
+
+  (>= (cm 10) (mm 100)) => truthy
+  (>= (cm 10) (mm 100)) => truthy
+
+  (>= (cm 100) (mm 100)) => truthy
+  (>= (cm 100) (mm 100)) => truthy
+
+  (min (cm 10) (mm 101)) => (cm 10)
+  (max (cm 10) (mm 101)) => (mm 101))
+
 

@@ -2,22 +2,26 @@
   (:refer-clojure :exclude (rem))
   (:use [converso.core :only (add-conversion remove-all-conversions convert)]
         [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic)]))
+        [units.generic :only (build-arithmetic build-comparisons)]
+
+        clojure.pprint))
 
 (defmacro deflength [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]
     `(do
 
-       ~(build-record u-name 'mag u-str)
-
-       ~(build-type-test u-name u-cstr)
+       ~(build-record u-name u-str)
 
        (defn ~u-cstr [mag#]
          (if (isa? (type mag#) Number)
            (~class-sym mag#)
            (convert mag# ~u-name)))
 
-       ~(build-arithmetic u-name u-cstr :mag)
+       ~(build-type-test u-name u-cstr)
+
+       ~(build-arithmetic u-name u-cstr)
+
+       ~(build-comparisons u-name)
 
        )))
 
@@ -40,6 +44,7 @@
 (deflength Inch       in "in")
 (deflength Point      pt "pt")
 (deflength Pica       pc "pc")
+
 
 ; conversions
 
