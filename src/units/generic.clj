@@ -90,9 +90,6 @@
          (build-binary-comparison a-name c))))
 
 
-(-> '(build-comparisons Pixel) macroexpand-1)
-
-
 (defn build-arithmetic
   "Construct the arithmetic defmethods for a given
   type given its contructor fn."
