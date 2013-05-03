@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/algo.generic "0.1.1"]
-                 [converso "0.1.0"]]
+                 [jeremys/converso "0.1.0"]]
 
   :profiles {:dev
              {:dependencies [[org.clojure/tools.trace "0.7.5"]
