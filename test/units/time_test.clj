@@ -35,7 +35,7 @@
 (fact "we can divide a duration"
   (/ (s 100) 10) => (s 10))
 
-(fact "We can convert absolute lengths into one another"
+(fact "We can convert durations types into one another"
   (-> 100.0 ms s) => (s 0.1)
   (-> 100 s ms) => (ms 100000))
 
