@@ -38,7 +38,7 @@
 (fact "we can divide a length"
   (/ (em 100) 10) => (em 10))
 
-(fact "We can convert absolute lengths inot one another"
+(fact "We can convert absolute lengths into one another"
   (-> 100 mm cm) => (cm 10)
   (-> 100 mm in :mag) => (roughly (/ 100 10 2.54)))
 
@@ -70,7 +70,6 @@
   (> (cm 10) (cm 10)) => falsey
   (> (cm 10) (mm 100)) => falsey
 
-  (<= (cm 10) (mm 100)) => truthy
   (<= (cm 10) (mm 100)) => truthy
 
   (<= (cm 100) (mm 100)) => falsey
