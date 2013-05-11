@@ -13,7 +13,7 @@
   (str (rem 10)) => "10rem"
   (str (% 10))   => "10%")
 
-(fact "We can test lenghts types"
+(fact "We can test length types"
   (em? (em 10)) => truthy
   (px? (em 10)) => falsey)
 
