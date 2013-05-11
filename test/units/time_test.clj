@@ -6,7 +6,7 @@
         clojure.algo.generic.arithmetic
         clojure.algo.generic.comparison))
 
-(fact "units of time have a string representation"
+(fact "Units of time have a string representation"
   (str (s 10))  => "10s"
   (str (ms 10))  => "10ms")
 
@@ -15,24 +15,24 @@
   (s? (ms 10)) => falsey)
 
 
-(fact "we can add two durations"
+(fact "We can add two durations"
   (+ (s 1) (s 3)) => (s 4)
   (+ (ms 100) (ms 10)) => (ms 110))
 
 
-(fact "we can negate a duration"
+(fact "We can negate a duration"
   (- (s 100)) => (s -100)
   (- (s -100)) => (s 100))
 
-(fact "we can substract two durations"
+(fact "We can substract two durations"
   (- (s 1) (s 3)) => (s -2)
   (- (ms 100) (ms 10)) => (ms 90))
 
-(fact "we can multiply a duration"
+(fact "We can multiply a duration"
   (* (s 100) 10) => (s 1000)
   (* 10 (s 100)) => (s 1000))
 
-(fact "we can divide a duration"
+(fact "We can divide a duration"
   (/ (s 100) 10) => (s 10))
 
 (fact "We can convert durations types into one another"

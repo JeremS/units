@@ -16,7 +16,7 @@
   (hz? (khz 10)) => falsey)
 
 
-(fact "we can add two Frequencies"
+(fact "we can add two frequencies"
   (+ (hz 1) (hz 3)) => (hz 4)
   (+ (khz 100) (khz 10)) => (khz 110))
 
@@ -25,7 +25,7 @@
   (- (hz 100)) => (hz -100)
   (- (hz -100)) => (hz 100))
 
-(fact "we can substract two Frequencies"
+(fact "we can substract two frequencies"
   (- (khz 1) (khz 3)) => (khz -2)
   (- (hz 100) (hz 10)) => (hz 90))
 
@@ -36,16 +36,16 @@
 (fact "we can divide a frequency"
   (/ (khz 100) 10) => (khz 10))
 
-(fact "We can convert Frequencies into one another"
+(fact "We can convert frequencies into one another"
   (-> 100.0 hz khz) => (khz 0.1)
   (-> 100 khz hz) => (hz 100000))
 
-(fact "We can add or substract frequency of different types"
+(fact "We can add or substract frequencies of different types"
   (+ (khz 1) (hz 1)) => (hz 1001)
   (- (hz 1000) (khz 1)) => (khz 0))
 
 
-(fact "We can compare Frequencies"
+(fact "We can compare frequencies"
   (neg?  (khz 10)) => falsey
   (pos?  (khz 10)) => truthy
   (zero? (khz 10)) => falsey

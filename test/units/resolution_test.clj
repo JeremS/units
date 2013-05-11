@@ -6,7 +6,7 @@
         clojure.algo.generic.arithmetic
         clojure.algo.generic.comparison))
 
-(fact "units have a string representation"
+(fact "Resolutions have a string representation"
   (str (dpi 10))  => "10dpi"
   (str (dppx 10))  => "10dppx"
   (str (dpcm 10)) => "10dpcm")

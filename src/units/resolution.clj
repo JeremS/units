@@ -7,7 +7,7 @@
 
 
 ;; ### Definition template
-;; Template used to define each duration types.
+;; Template used to define each resolution types.
 
 (defmacro ^:private defresolution
   [r-name r-cstr r-str]
@@ -31,6 +31,7 @@
 
 
 ;; ### Conversions
+
 (defn dpi->dpcm [r] (-> r :mag (* 2.54) dpcm))
 (defn dpcm->dpi [r] (-> r :mag (/ 2.54) dpi))
 
@@ -43,6 +44,7 @@
 
 
 ;; Set up of converso.
+
 (add-conversion DotsPerInch DotsPerCentimeter dpi->dpcm dpcm->dpi)
 (add-conversion DotsPerInch DotsPerPixel dpi->dppx dppx->dpi)
 
