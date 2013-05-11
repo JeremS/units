@@ -73,7 +73,6 @@
   (<= (cm 10) (mm 100)) => truthy
 
   (<= (cm 100) (mm 100)) => falsey
-  (<= (cm 100) (mm 100)) => falsey
 
   (>= (cm 10) (mm 100)) => truthy
   (>= (cm 10) (mm 100)) => truthy
