@@ -25,6 +25,7 @@
 
 
 ;; ### Types definitions
+
 (defduration Second  s  "s")
 (defduration MilliSecond  ms  "ms")
 

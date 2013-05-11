@@ -7,6 +7,7 @@
   (:use [units.macro-utils :only (build-generic)]
         [converso.core :only (add-conversion remove-all-conversions convert)]))
 
+
 ;; ### Definition template
 ;; Template used to define each length types.
 
@@ -22,6 +23,7 @@
            (convert mag# ~u-name)))
 
        )))
+
 
 ;; ### Types definitions
 

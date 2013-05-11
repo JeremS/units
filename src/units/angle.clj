@@ -30,14 +30,17 @@
        )))
 
 ;; ### Definition of the different angle types
+
 (defangle Degree   deg  "deg" 360)
 (defangle Gradiant grad "grad" 400)
 (defangle Radiant  rad  "rad" (* 2 Math/PI))
 (defangle Turn     turn "turn" 1)
 
+
 ;; ### Definition of conversion functions.
 ;; Here we don't need to define every conversion possible,
 ;; converso takes care of finding the missing ones.
+
 (defn deg->turn [x] (-> x :mag (/ 360.0) turn))
 (defn turn->deg [x] (-> x :mag (* 360.0) deg))
 
