@@ -3,8 +3,7 @@
 
 (ns  ^{:author "Jeremy Schoffen."}
   units.time
-  (:use [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic build-comparisons)]
+  (:use [units.macro-utils :only (build-generic)]
         [converso.core :only (add-conversion remove-all-conversions convert)]))
 
 
@@ -15,19 +14,12 @@
   [d-name d-cstr d-str]
   (let [class-sym (symbol (str d-name "."))]
     `(do
-
-       ~(build-record d-name d-str)
+       ~(build-generic d-name d-cstr d-str)
 
        (defn ~d-cstr [mag#]
          (if (isa? (type mag#) Number)
            (~class-sym mag#)
            (convert mag# ~d-name)))
-
-       ~(build-type-test d-name d-cstr)
-
-       ~(build-arithmetic d-name d-cstr)
-
-       ~(build-comparisons d-name)
 
        )))
 

@@ -4,11 +4,8 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.length
   (:refer-clojure :exclude (rem))
-  (:require [clojure.algo.generic.arithmetic :as agen]
-            [clojure.algo.generic.comparison :as cgen])
-  (:use [converso.core :only (add-conversion remove-all-conversions convert)]
-        [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic build-comparisons)]))
+  (:use [units.macro-utils :only (build-generic)]
+        [converso.core :only (add-conversion remove-all-conversions convert)]))
 
 ;; ### Definition template
 ;; Template used to define each length types.
@@ -17,19 +14,12 @@
   [u-name u-cstr u-str]
   (let [class-sym (symbol (str u-name "."))]
     `(do
-
-       ~(build-record u-name u-str)
+       ~(build-generic u-name u-cstr u-str)
 
        (defn ~u-cstr [mag#]
          (if (isa? (type mag#) Number)
            (~class-sym mag#)
            (convert mag# ~u-name)))
-
-       ~(build-type-test u-name u-cstr)
-
-       ~(build-arithmetic u-name u-cstr)
-
-       ~(build-comparisons u-name)
 
        )))
 

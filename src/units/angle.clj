@@ -6,9 +6,8 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.angle
   (:use [units.utils :only (circular-val)]
-        [converso.core :only (add-conversion remove-all-conversions convert)]
-        [units.macro-utils :only (build-record build-type-test)]
-        [units.generic :only (build-arithmetic build-comparisons)]))
+        [units.macro-utils :only (build-generic)]
+        [converso.core :only (add-conversion remove-all-conversions convert)]))
 
 
 ;; ### Template definition
@@ -21,18 +20,12 @@
   [a-name a-cstr a-str a-neutral]
   (let [class-sym (symbol (str a-name "."))]
     `(do
-       ~(build-record a-name a-str)
+       ~(build-generic a-name a-cstr a-str)
 
        (defn ~a-cstr [mag#]
          (if (isa? (type mag#) Number)
            (~class-sym (circular-val mag# ~a-neutral))
            (convert mag# ~a-name)))
-
-       ~(build-type-test a-name a-cstr)
-
-       ~(build-arithmetic a-name a-cstr)
-
-       ~(build-comparisons a-name)
 
        )))
 
