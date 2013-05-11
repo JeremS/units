@@ -45,6 +45,7 @@ bound in an interval. For instance:
 
 ## Changelog
 ### 0.2.1
+ - ADDED: Support of pretty much every unit type specified in css3.
  - ADDED: functions red blue... can now generate a new color when used
  with 2 args.
 
