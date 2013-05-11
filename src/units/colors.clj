@@ -153,39 +153,52 @@
 
 (defn red
   "Red component of a color."
-  [color]
-  (-> color rgba :r))
+  ([c]
+   (-> c rgba :r))
+  ([c mag]
+   (-> c rgba (assoc :r (color mag)))))
 
 (defn green
   "Green component of a color."
-  [color]
-  (-> color rgba :g))
+  ([c]
+   (-> c rgba :g))
+  ([c mag]
+   (-> c rgba (assoc :g (color mag)))))
 
 (defn blue
   "Blue component of a color."
-  [color]
-  (-> color rgba :b))
+  ([c]
+   (-> c rgba :b))
+  ([c mag]
+   (-> c rgba (assoc :b (color mag)))))
 
 
 (defn hue
   "Hue of a color."
-  [color]
-  (-> color hsla :h))
+  ([c]
+   (-> c hsla :h))
+  ([c mag]
+   (-> c hsla (assoc :h (deg mag)))))
 
 (defn saturation
   "Saturation of a color."
-  [color]
-  (-> color hsla :s))
+  ([c]
+   (-> c hsla :s))
+  ([c mag]
+   (-> c hsla (assoc :s (% mag)))))
 
 (defn lightness
   "Lightness of a color."
-  [color]
-  (-> color hsla :l))
+  ([c]
+   (-> c hsla :l))
+  ([c mag]
+   (-> c hsla (assoc :l (% mag)))))
 
 (defn alpha
   "Get the alpha/opacity of a color."
-  [color]
-  (:a color))
+  ([c] (:a c))
+  ([c mag]
+   (assoc c :a (opacity mag))))
 
 
 

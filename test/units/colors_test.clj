@@ -59,26 +59,33 @@
   (fact "we can see colors components"
     (red (rgba 255 255 255)) => 255
     (red (hsla (rgba 255 255 255))) => 255
+    (-> (rgba 255 255 255) (red 0) red) => 0
 
     (green (rgba 255 255 255)) => 255
     (green (hsla (rgba 255 255 255))) => 255
+    (-> (rgba 255 255 255) (green 0) green) => 0
 
     (blue (rgba 255 255 255)) => 255
     (blue (hsla (rgba 255 255 255))) => 255
+    (-> (rgba 255 255 255) (blue 0) blue) => 0
 
 
     (hue (hsla 90 50 50)) => 90
     (hue (rgba (hsla 90 50 50))) => (roughly 90 1/2)
+    (-> (hsla 90 10 10) (hue 0) hue) => 0
 
     (saturation (hsla 90 50 50)) => 50
     (saturation (rgba (hsla 90 50 50))) => (roughly 50 1/2)
+    (-> (hsla 90 10 10) (saturation 0) saturation) => 0
 
     (lightness (hsla 90 50 50)) => 50
     (lightness (rgba (hsla 90 50 50))) => (roughly 50 1/2)
+    (-> (hsla 90 10 10) (lightness 0) lightness) => 0
 
 
     (alpha (rgba 1 1 1 0.2)) => 0.2
-    (alpha (hsla 1 1 1 0.2)) => 0.2)
+    (alpha (hsla 1 1 1 0.2)) => 0.2
+    (-> (hsla 90 10 10 0.5) (alpha 0) alpha) => 0)
 
 
   (fact "We can play with color components"

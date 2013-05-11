@@ -44,11 +44,16 @@ bound in an interval. For instance:
 ```
 
 ## Changelog
- - conversions are now supported
- - generic comparison is now supported
- - arithmetic between different unit types are now possible
+### 0.2.1
+ - ADDED: functions red blue... can now generate a new color when used
+ with 2 args.
+
+### 0.2.0
+ - ADDED: conversions are now supported
+ - ADDED: generic comparison is now supported
+ - ADDED: arithmetic between different unit types are now possible
  if the types are compatibles.
- - what holds for arithmetic holds for comparisons too.
+ - ADDED: what holds for arithmetic holds for comparisons too.
 
 
 ## Todo
