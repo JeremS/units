@@ -8,6 +8,11 @@ Library allowing to manipulate different kinds of web units.
 (I extracted this library from [cljss](https://github.com/JeremS/cljss)
 thus the lack of more general units.)
 
+## Installation
+In `project.clj`:
+```clojure
+[jeremys/units "0.2.1"]
+```
 
 ## Usage
 ### Lengths & angles
