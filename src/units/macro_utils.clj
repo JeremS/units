@@ -7,6 +7,7 @@
         [units.utils :only (circular-val)]
         [converso.core :only (convert)]))
 
+;; ### templates
 ;; Generic templates for macros definig unit types.
 
 (defn build-record [a-name a-str]
@@ -52,6 +53,7 @@
            (~class-sym mag#)
            (convert mag# ~u-name))))))
 
+;; Template to define 'circular units', think angles.
 
 (defmacro def-circular-unit
   "Constructs the necessary parts needed to represent circular units."

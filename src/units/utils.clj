@@ -14,8 +14,10 @@
    :else           value))
 
 (defn circular-val
-  "Keeps a value between `0` and `neutral`."
+  "Keeps a value between `0` and `neutral`,
+  `neutral being positive`."
   [mag neutral]
+  {:pre [(pos? neutral)]}
   (-> mag
       (mod neutral)
       (+ neutral)

@@ -1,5 +1,5 @@
 ;; ## Time
-;; We define here units of  times usefull in css transtions.
+;; We define here units of times usefull in css transtions.
 
 (ns  ^{:author "Jeremy Schoffen."}
   units.time

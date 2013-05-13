@@ -1,5 +1,5 @@
 ;; ## Angles
-;; Here we define the necessary inmplementations
+;; Here we define the necessary implementations
 ;; to be able to use angle as value that we can
 ;; add, multiply and compare.
 

@@ -1,6 +1,6 @@
 ;; ## Colors
-;; Here are defined type for color, conversions
-;; and some helpers to work the colors !
+;; Here are defined types for color, conversions
+;; and some helpers to work with the colors.
 
 
 (ns ^{:author "Jeremy Schoffen."}

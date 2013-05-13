@@ -54,12 +54,13 @@
      ~@(for [g (concat binary-arithmetic-fns binary-comparison-fns)]
            (defgeneric-binary g))))
 
-;; We generates the generic comparisons here
+;; We generate the generic comparisons here
+
 (defgenerics-binary)
 
 
 (defn- build-unary-comparison
-  "Construct the defmethod for an unary comparison of a given type."
+  "Constructs the defmethod for an unary comparison of a given type."
   [a-name comp-fn]
   (let [g-fn (symbol "clojure.algo.generic.comparison" (str comp-fn))
         core-fn (symbol "clojure.core" (str comp-fn))]
@@ -68,7 +69,7 @@
        (~core-fn ~'m1))))
 
 (defn- build-binary-comparison
-  "Construct the defmethod for binary comparison of 2 value
+  "Constructs the defmethod for binary comparison of 2 value
   of one given type."
   [a-name comp-fn]
   (let [g-fn (symbol "clojure.algo.generic.comparison" (str comp-fn))
@@ -91,7 +92,7 @@
 
 
 (defn build-arithmetic
-  "Construct the arithmetic defmethods for a given
+  "Constructs the arithmetic defmethods for a given
   type given its contructor fn."
   [a-name a-cstr]
   `(do
