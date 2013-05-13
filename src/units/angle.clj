@@ -6,35 +6,16 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.angle
   (:use [units.utils :only (circular-val)]
-        [units.macro-utils :only (build-generic)]
-        [converso.core :only (add-conversion remove-all-conversions convert)]))
+        [units.macro-utils :only (def-circular-unit)]
+        [converso.core :only (add-conversion remove-all-conversions)]))
 
-
-;; ### Template definition
-;; Here we define a template used to construct each angle type.
-
-
-(defmacro ^:private defangle
-  "Constructs the necessary parts needed to represent
-  angle units."
-  [a-name a-cstr a-str a-neutral]
-  (let [class-sym (symbol (str a-name "."))]
-    `(do
-       ~(build-generic a-name a-cstr a-str)
-
-       (defn ~a-cstr [mag#]
-         (if (isa? (type mag#) Number)
-           (~class-sym (circular-val mag# ~a-neutral))
-           (convert mag# ~a-name)))
-
-       )))
 
 ;; ### Definition of the different angle types
 
-(defangle Degree   deg  "deg" 360)
-(defangle Gradiant grad "grad" 400)
-(defangle Radiant  rad  "rad" (* 2 Math/PI))
-(defangle Turn     turn "turn" 1)
+(def-circular-unit Degree   deg  "deg" 360)
+(def-circular-unit Gradiant grad "grad" 400)
+(def-circular-unit Radiant  rad  "rad" (* 2 Math/PI))
+(def-circular-unit Turn     turn "turn" 1)
 
 
 ;; ### Definition of conversion functions.

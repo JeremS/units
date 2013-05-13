@@ -3,31 +3,14 @@
 
 (ns  ^{:author "Jeremy Schoffen."}
   units.frequency
-  (:use [units.macro-utils :only (build-generic)]
-        [converso.core :only (add-conversion remove-all-conversions convert)]))
-
-
-;; ### Definition template
-;; Template used to define each frequency types.
-
-(defmacro ^:private deffrequency
-  [f-name f-cstr f-str]
-  (let [class-sym (symbol (str f-name "."))]
-    `(do
-       ~(build-generic f-name f-cstr f-str)
-
-       (defn ~f-cstr [mag#]
-         (if (isa? (type mag#) Number)
-           (~class-sym mag#)
-           (convert mag# ~f-name)))
-
-       )))
+  (:use [units.macro-utils :only (def-simple-unit)]
+        [converso.core :only (add-conversion remove-all-conversions)]))
 
 
 ;; ### Types definitions
 
-(deffrequency Hertz       hz   "Hz")
-(deffrequency KiloHertz  khz  "kHz")
+(def-simple-unit Hertz       hz   "Hz")
+(def-simple-unit KiloHertz  khz  "kHz")
 
 
 ;; ### Conversions

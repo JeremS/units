@@ -4,47 +4,30 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.length
   (:refer-clojure :exclude (rem))
-  (:use [units.macro-utils :only (build-generic)]
-        [converso.core :only (add-conversion remove-all-conversions convert)]))
-
-
-;; ### Definition template
-;; Template used to define each length types.
-
-(defmacro ^:private deflength
-  [u-name u-cstr u-str]
-  (let [class-sym (symbol (str u-name "."))]
-    `(do
-       ~(build-generic u-name u-cstr u-str)
-
-       (defn ~u-cstr [mag#]
-         (if (isa? (type mag#) Number)
-           (~class-sym mag#)
-           (convert mag# ~u-name)))
-
-       )))
+  (:use [units.macro-utils :only (def-simple-unit)]
+        [converso.core :only (add-conversion remove-all-conversions)]))
 
 
 ;; ### Types definitions
 
-(deflength Em  em  "em")
-(deflength Rem rem "rem")
-(deflength Ex  ex  "ex")
-(deflength Ch  ch  "ch")
+(def-simple-unit Em  em  "em")
+(def-simple-unit Rem rem "rem")
+(def-simple-unit Ex  ex  "ex")
+(def-simple-unit Ch  ch  "ch")
 
-(deflength Vw   vw   "vw")
-(deflength Vh   vh   "vh")
-(deflength VMin vmin "vmin")
-(deflength VMax vmax "vmax")
+(def-simple-unit Vw   vw   "vw")
+(def-simple-unit Vh   vh   "vh")
+(def-simple-unit VMin vmin "vmin")
+(def-simple-unit VMax vmax "vmax")
 
-(deflength Percentage % "%")
+(def-simple-unit Percentage % "%")
 
-(deflength Pixel      px "px")
-(deflength Millimeter mm "mm")
-(deflength Centimeter cm "cm")
-(deflength Inch       in "in")
-(deflength Point      pt "pt")
-(deflength Pica       pc "pc")
+(def-simple-unit Pixel      px "px")
+(def-simple-unit Millimeter mm "mm")
+(def-simple-unit Centimeter cm "cm")
+(def-simple-unit Inch       in "in")
+(def-simple-unit Point      pt "pt")
+(def-simple-unit Pica       pc "pc")
 
 
 ;; ### Conversions

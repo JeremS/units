@@ -1,33 +1,15 @@
 ;; ## Resolutions
 
-(ns  ^{:author "Jeremy Schoffen."}
+(ns ^{:author "Jeremy Schoffen."}
   units.resolution
-  (:use [units.macro-utils :only (build-generic)]
-        [converso.core :only (add-conversion remove-all-conversions convert)]))
-
-
-;; ### Definition template
-;; Template used to define each resolution types.
-
-(defmacro ^:private defresolution
-  [r-name r-cstr r-str]
-  (let [class-sym (symbol (str r-name "."))]
-    `(do
-       ~(build-generic r-name r-cstr r-str)
-
-       (defn ~r-cstr [mag#]
-         (if (isa? (type mag#) Number)
-           (~class-sym mag#)
-           (convert mag# ~r-name)))
-
-       )))
-
+  (:use [units.macro-utils :only (def-simple-unit)]
+        [converso.core :only (add-conversion remove-all-conversions)]))
 
 ;; ### Types definitions
 
-(defresolution DotsPerInch dpi  "dpi")
-(defresolution DotsPerCentimeter dpcm  "dpcm")
-(defresolution DotsPerPixel dppx  "dppx")
+(def-simple-unit DotsPerInch dpi  "dpi")
+(def-simple-unit DotsPerCentimeter dpcm  "dpcm")
+(def-simple-unit DotsPerPixel dppx  "dppx")
 
 
 ;; ### Conversions
