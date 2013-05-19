@@ -142,8 +142,36 @@
 
 ;; ### Conversions
 
-(add-conversion RGBa HSLa rgba->hsla hsla->rgba)
+(def ^:private rgb-regex #"(^#)([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$")
 
+
+;; change for cljs
+(defn- str->long [s]
+  (Long/decode s))
+
+(defn- hexa-str->long [s]
+  (str->long (apply str "0x" s)))
+
+
+(defn- double-character [c] [c c])
+
+(defn str->rgb [s]
+  (if-let [matches (re-find rgb-regex s)]
+    (let [s (-> (matches 2) seq vec)
+          s (if-not (= 3 (count s))
+              s
+              (mapcat #(list % %) s))]
+      (->> s
+           (partition 2)
+           (map hexa-str->long )
+           (apply rgba )))
+    (throw (ex-info (str "Can't make a color from " s) {}))))
+
+
+
+
+(add-conversion RGBa HSLa rgba->hsla hsla->rgba)
+(add-conversion String RGBa str->rgb)
 
 
 

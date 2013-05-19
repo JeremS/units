@@ -49,6 +49,9 @@ bound in an interval. For instance:
 ```
 
 ## Changelog
+### 0.2.2
+ - ADDED: Support for using rgba hexa notation of color.
+
 ### 0.2.1
  - ADDED: Support of pretty much every unit type specified in css3.
  - ADDED: functions red blue... can now generate a new color when used
@@ -63,6 +66,7 @@ bound in an interval. For instance:
 
 
 ## Todo
+ - Convert string -> color (rgba string -> color)
  - Rethink the arithmetic of the numbers contained in the different types
    - convert everything to floats ?
    - use ratios then to float at the last moment?

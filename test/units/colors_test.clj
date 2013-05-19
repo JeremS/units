@@ -50,9 +50,15 @@
     (rgba (hsla 120.0 100.0 50.0)) => (rgba   0 255   0)
     (rgba (hsla 240.0 100.0 50.0)) => (rgba   0   0 255)
 
-    (hsla (rgba 255   0   0)) = (hsla 0.0   100.0 50.0)
-    (hsla (rgba   0 255   0)) = (hsla 120.0 100.0 50.0)
-    (hsla (rgba   0   0 255)) = (hsla 240.0 100.0 50.0)))
+    (hsla (rgba 255   0   0)) => (hsla 0.0   100.0 50.0)
+    (hsla (rgba   0 255   0)) => (hsla 120.0 100.0 50.0)
+    (hsla (rgba   0   0 255)) => (hsla 240.0 100.0 50.0)
+
+    (rgba "#F00") => (rgba 255 0 0)
+    (hsla "#F00") => (hsla 0.0   100.0 50.0)
+
+    (rgba "#FF0000") => (rgba 255 0 0)
+    (hsla "#FF0000") => (hsla 0.0   100.0 50.0)))
 
 (facts "We have helpers to work with colors"
 
