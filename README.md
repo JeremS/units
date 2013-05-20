@@ -11,7 +11,7 @@ thus the lack of more general units.)
 ## Installation
 In `project.clj`:
 ```clojure
-[jeremys/units "0.2.1"]
+[jeremys/units "0.2.2-alpha1"]
 ```
 
 ## Usage
