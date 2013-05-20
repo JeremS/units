@@ -50,7 +50,7 @@ bound in an interval. For instance:
 
 ## Changelog
 ### 0.2.2
- - ADDED: Support for using rgba hexa notation of color.
+ - ADDED: Support for using rgba hexa notations of colors.
 
 ### 0.2.1
  - ADDED: Support of pretty much every unit type specified in css3.

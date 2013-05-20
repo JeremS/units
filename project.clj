@@ -1,4 +1,4 @@
-(defproject jeremys/units "0.2.2-SNAPSHOT"
+(defproject jeremys/units "0.2.2-alpha1"
   :description "Library allowing to manipulate different kinds of web units."
   :url "https://github.com/JeremS/units"
   :license {:name "Eclipse Public License"
