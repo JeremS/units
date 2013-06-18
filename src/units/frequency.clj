@@ -4,7 +4,7 @@
 (ns  ^{:author "Jeremy Schoffen."}
   units.frequency
   (:use [units.macro-utils :only (def-simple-unit)]
-        [converso.core :only (add-conversion remove-all-conversions)]))
+        [converso.core :only (defconversion)]))
 
 
 ;; ### Types definitions
@@ -18,10 +18,8 @@
 (defn hz->khz [t] (-> t :mag (/ 1000) khz))
 (defn khz->hz [t] (-> t :mag (* 1000) hz))
 
-(remove-all-conversions Hertz KiloHertz)
-
 
 ;; Set up of converso.
-(add-conversion Hertz KiloHertz hz->khz khz->hz)
+(defconversion Hertz KiloHertz hz->khz khz->hz)
 
 

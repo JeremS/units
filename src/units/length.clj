@@ -5,7 +5,7 @@
   units.length
   (:refer-clojure :exclude (rem))
   (:use [units.macro-utils :only (def-simple-unit)]
-        [converso.core :only (add-conversion remove-all-conversions)]))
+        [converso.core :only (defconversion)]))
 
 
 ;; ### Types definitions
@@ -49,16 +49,9 @@
 (defn- pc->pt [x] (-> x :mag (* 12.0) pt))
 (defn- pt->pc [x] (-> x :mag (/ 12.0) pc))
 
-;; Cleanning converso (usefful when developping at the repl.)
-(remove-all-conversions Centimeter Millimeter)
-(remove-all-conversions Inch       Centimeter)
-(remove-all-conversions Inch       Pixel)
-(remove-all-conversions Inch       Point)
-(remove-all-conversions Pica       Point)
-
 ;; Set up of converso.
-(add-conversion Centimeter Millimeter cm->mm mm->cm)
-(add-conversion Inch       Centimeter in->cm cm->in)
-(add-conversion Inch       Pixel      in->px px->in)
-(add-conversion Inch       Point      in->pt pt->in)
-(add-conversion Pica       Point      pc->pt pt->pc)
+(defconversion Centimeter Millimeter cm->mm mm->cm)
+(defconversion Inch       Centimeter in->cm cm->in)
+(defconversion Inch       Pixel      in->px px->in)
+(defconversion Inch       Point      in->pt pt->in)
+(defconversion Pica       Point      pc->pt pt->pc)

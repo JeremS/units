@@ -6,7 +6,7 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.colors
   (:use [units.utils  :only (circular-val keep-inside)]
-        [converso.core :only (add-conversion convert)]))
+        [converso.core :only (defconversion convert)]))
 
 ;; ### Private utilities
 
@@ -170,8 +170,8 @@
 
 
 
-(add-conversion RGBa HSLa rgba->hsla hsla->rgba)
-(add-conversion String RGBa str->rgb)
+(defconversion RGBa HSLa rgba->hsla hsla->rgba)
+(defconversion String RGBa str->rgb)
 
 
 

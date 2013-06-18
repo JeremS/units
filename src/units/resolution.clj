@@ -3,7 +3,7 @@
 (ns ^{:author "Jeremy Schoffen."}
   units.resolution
   (:use [units.macro-utils :only (def-simple-unit)]
-        [converso.core :only (add-conversion remove-all-conversions)]))
+        [converso.core :only (defconversion)]))
 
 ;; ### Types definitions
 
@@ -20,14 +20,9 @@
 (defn dpi->dppx [r] (-> r :mag (* 96) dppx))
 (defn dppx->dpi [r] (-> r :mag (/ 96.0) dpi))
 
-
-(remove-all-conversions DotsPerInch DotsPerCentimeter)
-(remove-all-conversions DotsPerInch DotsPerPixel)
-
-
 ;; Set up of converso.
 
-(add-conversion DotsPerInch DotsPerCentimeter dpi->dpcm dpcm->dpi)
-(add-conversion DotsPerInch DotsPerPixel dpi->dppx dppx->dpi)
+(defconversion DotsPerInch DotsPerCentimeter dpi->dpcm dpcm->dpi)
+(defconversion DotsPerInch DotsPerPixel dpi->dppx dppx->dpi)
 
 

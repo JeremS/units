@@ -7,7 +7,7 @@
   units.angle
   (:use [units.utils :only (circular-val)]
         [units.macro-utils :only (def-circular-unit)]
-        [converso.core :only (add-conversion remove-all-conversions)]))
+        [converso.core :only (defconversion)]))
 
 
 ;; ### Definition of the different angle types
@@ -32,14 +32,9 @@
 (defn turn->rad [x] (-> x :mag (* 2 Math/PI)  rad))
 
 
-; clean up the conversions (used when interactively developping)
-(remove-all-conversions Degree   Turn)
-(remove-all-conversions Gradiant Turn)
-(remove-all-conversions Radiant  Turn)
-
 ; set up of converso.
-(add-conversion Degree   Turn deg->turn  turn->deg)
-(add-conversion Gradiant Turn grad->turn turn->grad)
-(add-conversion Radiant  Turn rad->turn  turn->rad)
+(defconversion Degree   Turn deg->turn  turn->deg)
+(defconversion Gradiant Turn grad->turn turn->grad)
+(defconversion Radiant  Turn rad->turn  turn->rad)
 
 
